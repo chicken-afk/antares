@@ -54,12 +54,6 @@
                     <option value="{{ route('userPage', ['code' => $row['code'], 'category_id' => 'promo']) }}"
                         {{ $row['category_id'] == 'promo' ? 'selected' : null }}>
                         Promo</option>
-                    @foreach ($row['banners'] as $banner)
-                        <option
-                            {{ isset($row['banner_id']) ? ($row['banner_id'] == $banner->id ? 'selected' : null) : null }}
-                            value="{{ route('userPage', ['code' => $row['code'], 'banner_id' => $banner->id, 'banner' => 'true']) }}">
-                            {{ $banner->name }}</option>
-                    @endforeach
                     @foreach ($row['cat'] as $key => $value)
                         <option {{ $row['category_id'] == $value->id ? 'selected' : null }}
                             value="{{ route('userPage', ['code' => $row['code'], 'category_id' => $value->id]) }}">
@@ -76,13 +70,6 @@
     <div class="container">
         <div style="margin-top: 100px"></div>
         @php $c = 0; @endphp
-        @if (isset($row['banner_name']))
-            <div class="row">
-                <div class="col">
-                    <h3 class="category-title" style="font-size: 1.2rem ; margin-top : 10px">{{ $row['banner_name'] }}</h3>
-                </div>
-            </div>
-        @endif
         @foreach ($row['categories'] as $key => $value)
             @if ($row['categories'][$key]->products->count() != 0)
                 @php $c++ @endphp
@@ -96,25 +83,34 @@
                         <div class="col">
                             <h3 class="category-title">{{ $value->category_name }}</h3>
                         </div>
+                        {{-- <div class="col text-right" style="text-align: right">
+                            @if ($subCategories->count() > 0)
+                                <select name="subCategoryId" data-category-id="{{ $value->id }}"
+                                    data-menu-key="menu{{ $key }}" onchange="changeDataProduct(this)">
+                                    <option value="semua">Semua</option>
+                                    @foreach ($subCategories as $sub)
+                                        <option value="{{ $sub->id }}">{{ $sub->sub_category_name }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div> --}}
                     </div>
-                    @if (\Request::get('category_id') || ($row['category_id'] == 'semua' && \Request::get('banner_id') == null))
-                        @if ($subCategories->count() > 0)
-                            <div class="row">
+                    @if ($subCategories->count() > 0)
+                        <div class="row">
+                            <div class="col text-center">
+                                <button name="subCategoryId" data-category-id="{{ $value->id }}"
+                                    data-menu-key="menu{{ $key }}" onclick="changeDataProduct(this)"
+                                    data-value="semua" class="btn1">Semua</button>
+                            </div>
+                            @foreach ($subCategories as $sub)
                                 <div class="col text-center">
                                     <button name="subCategoryId" data-category-id="{{ $value->id }}"
                                         data-menu-key="menu{{ $key }}" onclick="changeDataProduct(this)"
-                                        data-value="semua" class="btn1">Semua(All)</button>
+                                        data-value="{{ $sub->id }}"
+                                        class="btn1">{{ $sub->sub_category_name }}</button>
                                 </div>
-                                @foreach ($subCategories as $sub)
-                                    <div class="col text-center">
-                                        <button name="subCategoryId" data-category-id="{{ $value->id }}"
-                                            data-menu-key="menu{{ $key }}" onclick="changeDataProduct(this)"
-                                            data-value="{{ $sub->id }}"
-                                            class="btn1">{{ $sub->sub_category_name }}</button>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
+                            @endforeach
+                        </div>
                     @endif
 
                     <div id="menu{{ $key }}">
@@ -367,28 +363,6 @@
             inputQtyProduct.val(1);
             inputQtyProduct.change();
         });
-
-
-
-        // $(document).ready(function() {
-        // $('.minus').click(function() {
-        //     const inputQtyProduct = $(this).parent().find('.inputQty');
-        //     var count = parseInt(inputQtyProduct.val()) - 1;
-        //     count = count < 1 ? 1 : count;
-        //     inputQtyProduct.val(count);
-        //     inputQtyProduct.change();
-        //     addedForm(this.id, count)
-        //     return false;
-        // });
-        // $('.plus').click(function() {
-        //     const inputQtyProduct = $(this).parent().find('.inputQty');
-        //     console.log(inputQtyProduct)
-        //     var qty = parseInt(inputQtyProduct.val()) + 1;
-        //     inputQtyProduct.val(qty);
-        //     inputQtyProduct.change();
-        //     addedForm(this.id, qty)
-        //     return false;
-        // });
 
         function submitMin(id) {
             console.log('masuk min')
