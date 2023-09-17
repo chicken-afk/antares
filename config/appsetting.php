@@ -11,7 +11,7 @@ return [
 
     "room_code" => "wiowieowijfa23423nfafaslakeoiweuoituwoafw323534eiroiwe3242rowMFALSDAFLDSksf",
 
-    "aps_name" => "Hotel Grand Antares",
+    "aps_name" => "Hotel Antares",
 
     "tax" => 0 //Dalam Persen
 ];

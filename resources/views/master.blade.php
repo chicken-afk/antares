@@ -19,7 +19,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <head>
     <base href="">
     <meta charset="utf-8" />
-    <title>POS Sistem || Warung Aceh Bang Ari</title>
+    <title>POS Sistem || {{ config('appsetting.aps_name') }}</title>
     <meta name="description" content="Updates and statistics" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -94,7 +94,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="container d-flex flex-column">
                             <!--begin::Title-->
                             <div class="d-flex align-items-sm-end flex-column flex-sm-row">
-                                <h2 class="d-flex align-items-center text-white mr-5 mb-0">Grand Antares Hotel</h2>
+                                <h2 class="d-flex align-items-center text-white mr-5 mb-0">
+                                    {{ config('appsetting.aps_name') }}</h2>
                                 <span class="text-white opacity-60 font-weight-bold">POS & Order Managament
                                     System</span>
                             </div>

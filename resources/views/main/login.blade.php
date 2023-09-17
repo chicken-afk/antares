@@ -215,7 +215,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             height="150" alt="">
                     </div>
                     <h3 class="display4 font-weight-bolder my-7 text-dark">
-                        Grand Antares Hotel
+                        {{ config('appsetting.aps_name') }}
                     </h3>
                     <p class="font-weight-bolder font-size-h2-md font-size-lg text-dark opacity-70">POS
                         &amp; Order Management System
