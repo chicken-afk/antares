@@ -153,7 +153,10 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--[html-partial:include:{"file":"partials/_extras/chat.html"}]/-->
 
     <!--[html-partial:include:{"file":"partials/_extras/scrolltop.html"}]/-->
-
+    <audio id="myAudio">
+        <source src="{{ asset('notif/notif.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     @include('partials._footer')
     <script>
         var HOST_URL = "";

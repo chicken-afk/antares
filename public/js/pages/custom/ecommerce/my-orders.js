@@ -2,6 +2,16 @@
 // Class definition
 var app_url = "127.0.0.1:8000";
 
+function playAudio() {
+    var notifSound = document.getElementById("myAudio");
+    notifSound.play();
+}
+
+function pauseAudio() {
+    var notifSound = document.getElementById("myAudio");
+    notifSound.pause();
+}
+
 function deleteProduct(id) {
     console.log(id);
     $.ajaxSetup({
@@ -346,6 +356,12 @@ var KTEcommerceMyOrders = function () {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
+                            const needNotif = dataSet.filter(item => item.is_notif == 0);
+                            needNotif.forEach(element => {
+                                // console.log("elementt:", element);
+                                changeNotif(element.id)
+                                playAudio();
+                            });
                             return dataSet;
                         },
                     },
@@ -755,3 +771,15 @@ function changeStatus(selected, invoiceNumber) {
 
 }
 
+function changeNotif(id) {
+    $.ajax({
+        url: `/change-notif-order/${id}`,
+        type: "GET",
+        success: function (response) {
+            console.log(response)
+        },
+        error: function (response) {
+            console.log(response)
+        }
+    });
+}

@@ -191,4 +191,9 @@ class OrderController extends Controller
         //     'invoice_link' => "/storage/invoices/$name.pdf"
         // ]);
     }
+
+    public function changeNotif($id)
+    {
+        DB::table('invoices')->where("id", $id)->update(['is_notif' => 1]);
+    }
 }
